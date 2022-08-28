@@ -77,7 +77,7 @@ void emulate_enttec_dmx(void)
       if (timeout > 20000) return;
     }
     timeout = 0;
-    b = Serial.read();
+    b = Serial.read(); // read a single byte
 
     switch (state) {
       case STATE_START:
