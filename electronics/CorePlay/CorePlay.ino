@@ -116,13 +116,7 @@ void emulate_enttec_dmx(void)
         if (b == 0xE7 && label == 6 && index > 1) {
           count = index;
           if (count > MAX_DMX_CHANNELS) count = MAX_DMX_CHANNELS;
-          // display the first 5 channels on LEDs
-          if (count >= 1) analogWrite(4, buffer[1]);
-          if (count >= 2) analogWrite(5, buffer[2]);
-          if (count >= 3) analogWrite(9, buffer[3]);
-          if (count >= 4) analogWrite(15, buffer[4]);
-          if (count >= 5) analogWrite(14, buffer[5]);
-//Serial1.printf("%02X%02X%02X\r\n", buffer[3]&255, buffer[4]&255, buffer[5]&255);
+          
           for (index=1; index <= count; index++) {
             DmxSimple.write(index, buffer[index]);
           }
