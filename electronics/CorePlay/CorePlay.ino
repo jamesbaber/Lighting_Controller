@@ -8,49 +8,6 @@ void loop()
     emulate_enttec_dmx();
   }
 }
-
-byte hexdigit(char c)
-{
-  if (c >= '0' && c <= '9') return c - '0';
-  if (c >= 'A' && c <= 'F') return c - 'A' + 10;
-  return 255;
-}
-
-
-int hex2bin(char *buf)
-{
-  byte b1, b2;
-  int i=0, count=0;
-  
-  while (1) {
-    b1 = hexdigit(buf[i++]);
-    if (b1 > 15) break;
-    b2 = hexdigit(buf[i++]);
-    if (b2 > 15) break;
-    buf[count++] = b1 * 16 + b2;
-  }
-  return count;
-}
-
-byte stringEndsWith(const char *str, const char *end)
-{
-  int i, len, elen;
-
-  len = strlen(str);
-  elen = strlen(end);
-  if (len < elen) return 0;
-  for (i=0; i < elen; i++) {
-    char c1, c2;
-    c1 = str[len - elen + i];
-    c2 = end[i];
-    if (c1 >= 'a' && c1 <= 'z') c1 = toupper(c1);
-    if (c2 >= 'a' && c2 <= 'z') c2 = toupper(c2);
-    if (c1 != c2) return 0;	
-  }
-  return 1;
-}
-
-
 // emulate a subset of the Entec DMX USB Pro
 //
 #define STATE_START    0
